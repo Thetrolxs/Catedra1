@@ -23,7 +23,7 @@ namespace Catedra1.src.DTO
 
         [Required(ErrorMessage ="El Género es obligatorio.")]
         [GenderValidator]
-        public string GenderId {get; set;} = string.Empty;
+        public int GenderId {get; set;}
 
         [Required(ErrorMessage ="La fecha de nacimiento es obligatoria.")]
         [DataType(DataType.Date)]
