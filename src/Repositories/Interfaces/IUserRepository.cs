@@ -17,6 +17,7 @@ namespace Catedra1.src.Repositories.Interfaces
         Task<bool> VerifyEmail(string email);
         Task<bool> VerifyUser(int id);
         Task<bool> EditUser(int id, EditUserDto user);
+        Task<bool> Delete(int id);
 
 
     }

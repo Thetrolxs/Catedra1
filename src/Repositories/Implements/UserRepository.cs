@@ -26,6 +26,19 @@ namespace Catedra1.src.Repositories.Implements
             return true;
         }
 
+        public async Task<bool> Delete(int id)
+        {
+            var user = await _context.Users.FindAsync(id);
+            if(user != null)
+            {
+                _context.Users.Remove(user);
+                await _context.SaveChangesAsync(); 
+                return true; 
+            }
+
+            return true;
+        }
+
         public async Task<bool> EditUser(int id, EditUserDto user)
         {
             var existingUser = await _context.Users.FindAsync(id);
