@@ -1,9 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "bxsNGX0Y7elE4jsSXfkgrA3oVRvFq4XuEMO1vPX7z4ZsNUZCWwM51J0mz6TvNPF1G3E/StHf1fKCW8MN+1ORvw==",
+  "dgSpecHash": "f20OQpfbfev0/zQSNyoRRlr+TIodSRKBsEsBEG155J+gXZ7/Y8nW3LCLBUQXlPguKqumwfJQqa9hK+J/kP637A==",
   "success": true,
   "projectFilePath": "C:\\Users\\nasho\\Catedra1\\Catedra1.csproj",
   "expectedPackageFiles": [
+    "C:\\Users\\nasho\\.nuget\\packages\\bogus\\35.6.1\\bogus.35.6.1.nupkg.sha512",
     "C:\\Users\\nasho\\.nuget\\packages\\humanizer.core\\2.14.1\\humanizer.core.2.14.1.nupkg.sha512",
     "C:\\Users\\nasho\\.nuget\\packages\\microsoft.aspnetcore.openapi\\8.0.4\\microsoft.aspnetcore.openapi.8.0.4.nupkg.sha512",
     "C:\\Users\\nasho\\.nuget\\packages\\microsoft.bcl.asyncinterfaces\\6.0.0\\microsoft.bcl.asyncinterfaces.6.0.0.nupkg.sha512",
