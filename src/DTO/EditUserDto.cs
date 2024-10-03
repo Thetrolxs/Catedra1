@@ -28,6 +28,6 @@ namespace Catedra1.src.DTO
         [Required(ErrorMessage ="La fecha de nacimiento es obligatoria.")]
         [DataType(DataType.Date)]
         
-        public string Birthday {get; set;} = string.Empty;
+        public DateTime Birthday {get; set;}
     }
 }
