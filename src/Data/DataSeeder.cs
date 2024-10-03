@@ -37,7 +37,8 @@ namespace Catedra1.src.Data
                 var users = faker.Generate(20);
 
                 context.Users.AddRange(users);
-                
+
+                context.SaveChanges();   
             }
         }
     private static string GenerateUniqueRandomRut(HashSet<string> existingRuts)
