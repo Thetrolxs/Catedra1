@@ -130,3 +130,5 @@ C:\Users\nasho\Catedra1\obj\Debug\net8.0\Catedra1.pdb
 C:\Users\nasho\Catedra1\obj\Debug\net8.0\Catedra1.genruntimeconfig.cache
 C:\Users\nasho\Catedra1\obj\Debug\net8.0\ref\Catedra1.dll
 C:\Users\nasho\Catedra1\bin\Debug\net8.0\Catedra 1.postman_collection.json
+C:\Users\nasho\Catedra1\bin\Debug\net8.0\AutoMapper.dll
+C:\Users\nasho\Catedra1\bin\Debug\net8.0\AutoMapper.Extensions.Microsoft.DependencyInjection.dll

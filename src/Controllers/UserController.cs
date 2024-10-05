@@ -1,24 +1,27 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using AutoMapper;
 using Catedra1.src.DTO;
+using Catedra1.src.Helpers;
 using Catedra1.src.Models;
 using Catedra1.src.Repositories.Interfaces;
 using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore.Metadata;
 
 namespace Catedra1.src.Controllers
 {
     [ApiController]
     [Route("user")]
-    public class UserController : ControllerBase
+    public class UserController : ControllerBase 
     {
         private readonly IUserRepository _repository;
+        private readonly IMapper _mapper;
+        private readonly IGenderRepository _genderRepository;
 
-        public UserController(IUserRepository repository)
+        public UserController(IUserRepository repository, IMapper mapper, IGenderRepository genderRepository)
         {
             _repository = repository;
+            _mapper = mapper;
+            _genderRepository = genderRepository;
         }
 
         [HttpGet]
@@ -29,42 +32,29 @@ namespace Catedra1.src.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult> CreateUser([FromBody] RegisterUserDto register)
+        public async Task<ActionResult> CreateUser([FromBody] EditUserDto register)
         {
-            if(!ModelState.IsValid)
-            {
+            if (!ModelState.IsValid){
                 return BadRequest(ModelState);
             }
+            try{
+                var mappedUser = _mapper.Map<User>(register);
+                if(!_genderRepository.ValidatedGenderId(mappedUser.GenderId).Result){
+                    throw new Exception("El genero no es valido.");
+                }
+                if(!_repository.VerifyRut(mappedUser.Rut).Result){
+                    return Conflict("El RUT ya existe.");
+                }
+                if(!_repository.VerifyEmail(mappedUser.Email).Result){
+                    throw new Exception("El email ingresado ya existe.");
+                }
 
-            var isRutExists = await _repository.VerifyRut(register.Rut);
-            if(isRutExists)
-            {
-                return Conflict("El rut ingresado ya se encuentra registrado.");
+                await _repository.AddUser(mappedUser);
+
+                return Ok("Usuario creado exitosamente");
+            } catch {
+                return BadRequest("Alguna validación no fue cumplida");
             }
-
-            var isEmailExists = await _repository.VerifyEmail(register.Email);
-            if(isEmailExists)
-            {
-                return Conflict("El correo ingresado ya se encuentra registrado.");
-            }
-
-            var newUser = new User
-            {
-                Rut = register.Rut,
-                Name = register.Name,
-                Email = register.Email,
-                //arreglar gender
-                Birthday = DateTime.Parse(register.Birthday)
-            };
-
-            var result = await _repository.AddUser(newUser);
-
-            if(!result)
-            {
-                return StatusCode(500, "Hubo un error al crear al usuario.");
-            }
-
-            return CreatedAtAction(nameof(GetUsers), new {id = newUser.Id}, newUser);
         }
 
         [HttpPut("{id}")]

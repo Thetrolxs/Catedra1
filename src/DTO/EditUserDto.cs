@@ -27,7 +27,7 @@ namespace Catedra1.src.DTO
 
         [Required(ErrorMessage ="La fecha de nacimiento es obligatoria.")]
         [DataType(DataType.Date)]
-        
+        [DateValidator]        
         public DateTime Birthday {get; set;}
     }
 }
